@@ -1,0 +1,36 @@
+{
+  "name": "aab-content",
+  "description": "a@b framework - Content parser / encoder",
+  "version": "1.0.0",
+  "author": "Frédéric Declercq <frederic.declercq@aab.life>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aabfred/aab-content.git"
+  },
+  "homepage": "https://github.com/aabfred/aab-content#readme",
+  "keywords": [
+    "a@b",
+    "framework",
+    "body",
+    "form",
+    "multipart",
+    "parse"
+  ],
+  "engines": {
+    "node": ">= 10.1.0"
+  },
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint .",
+    "test": "mocha"
+  },
+  "bugs": {
+    "url": "https://github.com/aabfred/aab-content/issues"
+  },
+  "devDependencies": {
+    "aab-utils": "1.0.0",
+    "eslint": "4.19.1",
+    "mocha": "5.1.1"
+  }
+}

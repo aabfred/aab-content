@@ -1,0 +1,39 @@
+{
+    "env": {
+        "es6": true,
+        "node": true,
+        "mocha": true
+    },
+    "extends": "eslint:recommended",
+    "parserOptions": {
+        "ecmaVersion": 2017
+    },
+    "rules": {
+        "indent": [
+            "warn",
+            4,
+            { "SwitchCase": 1 }
+        ],
+        "linebreak-style": [
+            "error",
+            "unix"
+        ],
+        "no-cond-assign": [
+            "error",
+            "except-parens"
+        ],
+        "no-unused-vars": [
+            "error",
+            { "varsIgnorePattern": "^_" }
+        ],
+        "quotes": [
+            "warn",
+            "double",
+            { "allowTemplateLiterals": true, "avoidEscape": true }
+        ],
+        "semi": [
+            "error",
+            "always"
+        ]
+    }
+}
