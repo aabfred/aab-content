@@ -52,8 +52,14 @@ Possible status:
 #### result
 Result is an object containing at least:
 * method *( string, upper case )*
+* domain *( string, lower case )*
+* protocol *( string, lower case )*
 * path *( without query string )*
 * flags *( array of lower case strings )*
+* port *( number if defined in url )*
+* hash *( string, lower case if defined in url )*
+* username *( string, if defined in url )*
+* password *( string, if defined in url )*
 * query *( object resulting querystring.parse() on defined query )*
 
 On content, result also contains:
