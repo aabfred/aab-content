@@ -131,7 +131,7 @@ class ContentParser {
 
 }
 
-
+ContentParser.statusError = statusError;
 ContentParser.methods = {
     DELETE:  [ "idempotent" ],
     GET:     [ "response", "form", "safe", "idempotent", "cacheable" ],
