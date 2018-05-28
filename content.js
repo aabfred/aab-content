@@ -64,18 +64,31 @@ class ContentParser {
     }
 
     parse( stream, headers ){
+        let pt = headers[":path"];
+        if( [ undefined, "*" ].includes( pt ) ) pt = "/";
         const
             { methods, limit } = this,
             method = headers[":method"],
-            flags = methods[ method ];
+            flags = methods[ method ],
+            url = new URL( headers[":scheme"] + "://" + headers[":authority"] + pt );
         if( !flags )
             throw statusError( 405, method );
 
         const
-            [ path, query ] = headers[ ":path" ].split("?"),
-            result = { method, path, flags },
+            result = {
+                method,
+                flags: flags.slice(),
+                domain: url.hostname,
+                path: headers[":path"] == "*"? "*" : url.pathname,
+                protocol: url.protocol.slice(0, -1)
+            },
             formOK = flags.includes("form");
-        if( query ) result.query = qs( query );
+
+        if( url.search ) result.query = qs( url.search.substr(1) );
+        if( url.hash ) result.hash = url.hash.substr(1);
+        if( url.port ) result.port = Number( url.port );
+        if( url.username ) result.username = url.username;
+        if( url.password ) result.password = url.password;
 
         if( !formOK && !flags.includes("request") )
             return result;
@@ -84,7 +97,7 @@ class ContentParser {
         if( !content.mime ) return result;
 
         if( method == "GET" ){
-            if( !query || ( content.mime !== "application/x-www-form-urlencoded" ) )
+            if( content.mime !== "application/x-www-form-urlencoded" )
                 return result;
             content.datatype = "form",
             result.body = () => Promise.resolve( result.query || {} );
